@@ -1,6 +1,7 @@
 from config.product_config.mongo_connection import Settings, Client
 from operations.product.search_mongo.insert import MongoInsert
 from operations.product.search_mongo.update import MongoUpdate
+from operations.product.search_mongo.delete import MongoDelete
 
 
 class Mongoose(object):
@@ -18,3 +19,4 @@ class Mongoose(object):
 
         self.insert = MongoInsert(_client=self.client, db_name=self.dbname, collection_name=self.collectionName)
         self.update = MongoUpdate(_client=self.client, db_name=self.dbname, collection_name=self.collectionName)
+        self.delete = MongoDelete(_client=self.client, db_name=self.dbname, collection_name=self.collectionName)

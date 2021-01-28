@@ -11,11 +11,14 @@ class MongoDelete(BaseDelete):
         """
         my_query = {'product_id': record["product_id"]}
         try:
-            if self.client.mclient[self.dbname][self.collectionName].find(my_query).count() > 0:
-                self.client.mclient[self.dbname][self.collectionName].delete_one(my_query)
-                return True
+            self.client.mclient[self.dbname][self.collectionName].delete_one(my_query)
+            return True
         except Exception as e:
             return False
 
     def delete_many(self, record={}):
-        return False
+        try:
+            self.client.mclient[self.dbname][self.collectionName].delete_many(record)
+            return True
+        except Exception as e:
+            return False
