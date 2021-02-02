@@ -2,10 +2,6 @@ __NAME__ = "Anand and Indranil Elastic framwork"
 __VERSION__ = "0.1"
 
 try:
-    import os
-    import io
-    import sys
-    import json
     import uuid
     from elasticsearch import Elasticsearch
 except Exception as e:

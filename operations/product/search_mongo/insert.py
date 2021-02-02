@@ -1,4 +1,4 @@
-from operations.base_operation.base_insert import BaseInsert
+from operations.base_operation_mongo.base_insert import BaseInsert
 
 
 class MongoInsert(BaseInsert):

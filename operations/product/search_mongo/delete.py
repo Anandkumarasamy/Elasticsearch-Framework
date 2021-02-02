@@ -1,4 +1,4 @@
-from operations.base_operation.base_delete import BaseDelete
+from operations.base_operation_mongo.base_delete import BaseDelete
 
 
 class MongoDelete(BaseDelete):

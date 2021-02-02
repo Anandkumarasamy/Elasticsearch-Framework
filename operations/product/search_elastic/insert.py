@@ -1,9 +1,12 @@
-class ElasticInsert(object):
+try:
+    from elasticsearch import helpers
+except Exception as e:
+    print("Error: {} ".format(e))
 
-    def __init__(self, _client=None, index=None, doc_type=None):
-        self.client = _client
-        self.index = index
-        self.doc_type = doc_type
+from operations.base_operation_elasticsearch.base_insert import BaseInsert
+
+
+class ElasticInsert(BaseInsert):
 
     def insert_one(self, record={}):
         """
@@ -12,10 +15,24 @@ class ElasticInsert(object):
         return: Bool
         """
         try:
-            respon = self.client.elastic.create(index=self.index,
-                                                doc_type=self.doc_type,
-                                                id=id,
-                                                body=record)
+            response = self.client.elastic.index(index=self.index,
+                                                 doc_type=self.doc_type,
+                                                 body=record)
+            return True
+        except Exception as e:
+            return False
+
+    def insert_many(self, record={}):
+        """
+        insert many record in Elasticsearch
+        param record: json
+        return: Bool
+        """
+        try:
+            response = helpers.bulk(self.client.elastic, record,
+                                    index=self.index,
+                                    doc_type=self.doc_type)
+
             return True
         except Exception as e:
             return False

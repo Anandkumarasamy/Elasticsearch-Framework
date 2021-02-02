@@ -1,21 +1,36 @@
-class ElasticDelete(object):
+from operations.base_operation_elasticsearch.base_delete import BaseDelete
 
-    def __init__(self, _client=None, index=None, doc_type=None):
-        self.client = _client
-        self.index = index
-        self.doc_type = doc_type
+
+class ElasticDelete(BaseDelete):
 
     def delete_one(self, id=id):
         """
-        update record in Elasticsearch
+        delete record in Elasticsearch
         param record: json
         return: Bool
         """
 
         try:
-            respon = self.client.elastic.update(index=self.index,
-                                                doc_type=self.doc_type,
-                                                id=id)
+            response = self.client.elastic.delete(index=self.index,
+                                                  doc_type=self.doc_type,
+                                                  id=id)
+            return True
+        except Exception as e:
+            return False
+
+    def delete_many(self, record=[]):
+        """
+        delete many record in Elasticsearch
+        param record: json
+        return: Bool
+        """
+        query = []
+        for doc_id in record:
+            sub_query = {"delete": {"_index": self.index, "_type": self.doc_type, "_id": doc_id["_id"]}}
+            query.append(sub_query)
+
+        try:
+            response = self.client.elastic.bulk(query)
             return True
         except Exception as e:
             return False

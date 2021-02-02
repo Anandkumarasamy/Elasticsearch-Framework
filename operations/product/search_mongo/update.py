@@ -1,4 +1,4 @@
-from operations.base_operation.base_update import BaseUpdate
+from operations.base_operation_mongo.base_update import BaseUpdate
 
 
 class MongoUpdate(BaseUpdate):

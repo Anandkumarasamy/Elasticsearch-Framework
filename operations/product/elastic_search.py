@@ -18,6 +18,6 @@ class ElasticSearch(object):
         self.doc_type = doc_type
 
         self.insert = ElasticInsert(_client=self.client, index=self.index, doc_type=self.doc_type)
-        #self.update = ElasticUpdate(_client=self.client, index=self.index, doc_type=self.doc_type)
-        #self.delete = ElasticDelete(_client=self.client, index=self.index, doc_type=self.doc_type)
+        self.update = ElasticUpdate(_client=self.client, index=self.index, doc_type=self.doc_type)
+        self.delete = ElasticDelete(_client=self.client, index=self.index, doc_type=self.doc_type)
         #self.get = ElasticGet(_client=self.client, index=self.index, doc_type=self.doc_type)

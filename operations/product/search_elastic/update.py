@@ -1,9 +1,7 @@
-class ElasticUpdate(object):
+from operations.base_operation_elasticsearch.base_update import BaseUpdate
 
-    def __init__(self, _client=None, index=None, doc_type=None):
-        self.client = _client
-        self.index = index
-        self.doc_type = doc_type
+
+class ElasticUpdate(BaseUpdate):
 
     def update_one(self, query, id=id):
         """
@@ -13,10 +11,10 @@ class ElasticUpdate(object):
         """
 
         try:
-            respon = self.client.elastic.update(index=self.index,
-                                                doc_type=self.doc_type,
-                                                id=id,
-                                                body=query)
+            response = self.client.elastic.update(index=self.index,
+                                                  doc_type=self.doc_type,
+                                                  id=id,
+                                                  body=query)
             return True
         except Exception as e:
             return False
